@@ -3,21 +3,12 @@
 
 // Mock document elements
 global.document.getElementById = jest.fn((id) => {
-  const mockElement = {
+  return {
     textContent: '',
     style: { display: 'none' },
     addEventListener: jest.fn(),
     disabled: false
   };
-  
-  // Return specific mocks for known elements
-  if (id === 'score') return mockElement;
-  if (id === 'powerUpgrade') return mockElement;
-  if (id === 'powerLevel') return mockElement;
-  if (id === 'shopOverlay') return mockElement;
-  if (id === 'closeShop') return mockElement;
-  
-  return mockElement;
 });
 
 // Mock Phaser Scene class
@@ -70,10 +61,6 @@ global.Phaser = {
         image: jest.fn()
       };
     }
-    
-    preload() {}
-    create() {}
-    update() {}
   },
   AUTO: 'AUTO',
   Game: class MockGame {

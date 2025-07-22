@@ -4,11 +4,12 @@ class PoolGame extends Phaser.Scene {
         this.score = 0;
         this.ballMoving = false;
         this.powerLevel = 1;
-        this.basePower = 500;
+        this.basePower = 300;
         this.tableFriction = 0.96; // Adjustable friction coefficient (lower = more friction)
         this.redBallCount = 0;
         this.redBalls = [];
         this.anyBallMoving = false;
+        this.trajectoryDots = [];
     }
 
     preload() {
@@ -28,9 +29,6 @@ class PoolGame extends Phaser.Scene {
         const tableX = (gameWidth - tableWidth) / 2;
         const tableY = (gameHeight - tableHeight) / 2;
 
-        // Create pool table background (green felt)
-        const table = this.add.rectangle(gameWidth / 2, gameHeight / 2, tableWidth, tableHeight, 0x228B22);
-        
         // Create rails (brown borders)
         // Top rail
         this.add.rectangle(gameWidth / 2, tableY - railWidth / 2, tableWidth + railWidth * 2, railWidth, 0x8B4513);
@@ -224,8 +222,12 @@ class PoolGame extends Phaser.Scene {
     }
 
     hideAiming() {
-        for (let dot of this.trajectoryDots) {
-            dot.setVisible(false);
+        if (this.trajectoryDots && this.trajectoryDots.length > 0) {
+            for (let dot of this.trajectoryDots) {
+                if (dot && dot.setVisible) {
+                    dot.setVisible(false);
+                }
+            }
         }
     }
 

@@ -201,7 +201,7 @@ describe('PoolGame', () => {
         });
 
         test('should not move ball when already moving', () => {
-            game.ballMoving = true;
+            game.anyBallMoving = true;
             const pointer = { x: 350, y: 250 };
             
             game.onBallClick(pointer);
@@ -210,7 +210,7 @@ describe('PoolGame', () => {
         });
 
         test('should move ball in opposite direction from click', () => {
-            game.ballMoving = false;
+            game.anyBallMoving = false;
             const pointer = { x: 350, y: 250 }; // Click left and up from ball
             
             game.onBallClick(pointer);
@@ -225,7 +225,7 @@ describe('PoolGame', () => {
         });
 
         test('should use correct speed based on power level', () => {
-            game.ballMoving = false;
+            game.anyBallMoving = false;
             game.powerLevel = 3;
             const pointer = { x: 300, y: 300 }; // Click directly left
             
@@ -237,7 +237,7 @@ describe('PoolGame', () => {
         });
 
         test('should handle zero distance click gracefully', () => {
-            game.ballMoving = false;
+            game.anyBallMoving = false;
             const pointer = { x: 400, y: 300 }; // Click exactly on ball
             
             expect(() => game.onBallClick(pointer)).not.toThrow();
