@@ -224,7 +224,7 @@ class PoolGame extends Phaser.Scene {
     hideAiming() {
         if (this.trajectoryDots && this.trajectoryDots.length > 0) {
             for (let dot of this.trajectoryDots) {
-                if (dot && dot.setVisible) {
+                if (dot?.setVisible) {
                     dot.setVisible(false);
                 }
             }
